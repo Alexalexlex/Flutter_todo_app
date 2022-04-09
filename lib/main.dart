@@ -1,6 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/card.dart';
 import 'package:todo_app/widgets/home_page.dart';
+
+import 'core/requests.dart';
 
 void main() {
   runApp(Todo());
@@ -10,6 +13,7 @@ class Todo extends StatelessWidget {
   @override
   final list = [];
   Widget build(BuildContext context) {
+    Requests().get().then((value) => print(value));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
