@@ -1,24 +1,51 @@
 import 'package:flutter/material.dart';
 
-class CardWidget extends StatelessWidget {
-  const CardWidget({Key? key}) : super(key: key);
+import 'edit_card.dart';
+
+class CardWidget extends StatefulWidget {
+  final Function() onDelete;
+
+  const CardWidget({Key? key, required this.onDelete}) : super(key: key);
+
+  @override
+  State<CardWidget> createState() => _CardWidgetState();
+}
+
+class _CardWidgetState extends State<CardWidget> {
+  var _text = 'A card that can be tapped';
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Card(
         child: InkWell(
           splashColor: Colors.blue.withAlpha(30),
           onTap: () {
-            debugPrint('Card tapped.');
+            showCardEditDialog(context, _text, (text) {
+              setState(() {
+                _text = text;
+              });
+            });
           },
-          child: const SizedBox(
-            width: 300,
-            height: 100,
-            child: Text(
-              'A card that can be tapped',
-              textAlign: TextAlign.center,
-              style: TextStyle(height: 5),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
+            child: Row(
+              children: [
+                Text(
+                  _text,
+                  // textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                const Expanded(child: SizedBox()),
+                IconButton(
+                  onPressed: () {
+                    widget.onDelete();
+                  },
+                  icon: const Icon(Icons.delete),
+                )
+              ],
             ),
           ),
         ),

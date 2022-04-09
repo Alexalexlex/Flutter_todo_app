@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/card.dart';
-import 'package:todo_app/widgets/homePage.dart';
+import 'package:todo_app/widgets/home_page.dart';
 
 void main() {
   runApp(Todo());
@@ -8,6 +8,7 @@ void main() {
 
 class Todo extends StatelessWidget {
   @override
+  final list = [];
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -27,14 +28,6 @@ class Todo extends StatelessWidget {
           title: Text('To-Do List'),
         ),
         body: Homepage(),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            // Add your onPressed code here!
-          },
-          label: const Text('Create card'),
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-          icon: const Icon(Icons.add),
-        ),
       ),
     );
   }
